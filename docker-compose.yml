@@ -1,0 +1,20 @@
+version: '2'
+services:
+  jenkins:
+    # Use this to build the master jenkins image
+    build: ./images/master/
+    # Or, use the following for an image in a registry
+    # image: craigbarrau/jenkins-master
+    networks:
+      - jenkins
+    ports:
+      - '8080:8080'
+      - '9080:9080'
+    volumes:
+      - 'jenkins_data:/var/jenkins_home'
+      - /var/run/docker.sock:/var/run/docker.sock
+networks:
+  jenkins:
+volumes:
+  jenkins_data:
+    driver: local
